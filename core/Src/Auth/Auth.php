@@ -2,7 +2,6 @@
 
 namespace Src\Auth;
 
-use Src\IdentityInterface;
 use Src\Session;
 
 class Auth
