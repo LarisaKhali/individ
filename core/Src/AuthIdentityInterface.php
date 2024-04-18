@@ -1,8 +1,8 @@
 <?php
 
-namespace Src;
+namespace Src\Auth;
 
-interface AuthIdentityInterface
+interface IdentityInterface
 {
     public function findIdentity(int $id);
 

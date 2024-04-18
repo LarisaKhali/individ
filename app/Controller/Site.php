@@ -11,7 +11,7 @@ class Site
 {
     public function hello()
     {
-        return (new View())->render('site.hello',['message' => 'welcome to site!']);
+        return (new View())->render('site.hello',['message' => 'Сайт для работы с учебно-методическим управлением, перейдите в профиль для работы']);
     }
 
     public function signup(Request $request): string
