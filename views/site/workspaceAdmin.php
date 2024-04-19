@@ -50,7 +50,6 @@ if (app()->auth::check() && app()->auth->user()->role_id == 1):
             <p class="userPassword">Пароль: olia12345</p>
             <button type="submit" class="deleteWorker">Удалить сотрудника</button>
         </div>
-        <img src="../../public/img/arrow-down.png" alt="Нет изображения" class="arrowDownIcon">
 
     </main>
 

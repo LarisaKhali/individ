@@ -16,7 +16,7 @@ class Site
 
     public function profile(Request $request): string
     {
-        if ($request->method==='POST' && User::create($request->all())) {
+        if ($request->method ==='POST' && User::create($request->all())) {
             echo 'Пользователь успешно зарегистрирован!';
         }
         return (new View())->render('site.profile');

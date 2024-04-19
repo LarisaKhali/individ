@@ -10,7 +10,6 @@
 
 body {
     background: url("../img/background_image.jpg") no-repeat;
-    background-size: 1920px 1000px;
 }
 
 
@@ -230,6 +229,9 @@ header {
 
 p {
     font-size: 20px;
+    width: 230px;
+    display: flex;
+    justify-content: center;
 }
 
 .inputAvatar {
@@ -302,3 +304,139 @@ input[type="file"] {
 .changeInfoForm {
     height: 300px;
 }
+
+.youNotAuthorizedText {
+    position: relative;
+    top: 315px;
+    left: 685px;
+    width: 700px;
+    font-size: 48px;
+}
+
+.goToAuth {
+    position: relative;
+    top: 350px;
+    left: 790px;
+}
+
+.addWorker {
+    position: relative;
+    left: 190px;
+    top: 50px;
+    padding-left: 10px;
+    padding-top: 10px;
+    width: 763px;
+    height: 279px;
+    border: 1px solid #1889C9
+}
+
+.addWorkerForm {
+    width: 738px;
+    height: 134px;
+}
+.addWorkerForm1, .addWorkerForm2, .addWorkerForm3 {
+    padding-top: 10px;
+}
+
+.addWorkerForm2 {
+    position: relative;
+    left: 243px;
+    bottom: 189px;
+}
+
+.addWorkerForm3 {
+    position: relative;
+    left: 485px;
+    bottom: 378px;
+}
+
+.createWorkerButton {
+    position: relative;
+    bottom: 380px;
+    left: 243px;
+    width: 230px;
+    height: 40px;
+    background: #36A5BD;
+    border: none;
+    border-radius: 25px;
+    color: #FFE8D2;
+    font-size: 18px;
+    transition: .9s;
+}
+
+.createWorkerButton:hover {
+    cursor: pointer;
+    border: 2px solid #36A5BD;
+    color: #36A5BD;
+    background: white;
+    transition: .9s;
+}
+
+.c-g {
+    color: #232828;
+    opacity: .9;
+}
+
+.allWorkers {
+    position: relative;
+    width: 1528px;
+    left: 195px;
+    top: 80px;
+}
+
+.fs-30px {
+    font-size: 30px;
+}
+
+.worker1 {
+    position: relative;
+    top: 25px;
+    width: 1528px;
+    height: 114px;
+    background: #0A385429;
+}
+
+.worker2 {
+    position: relative;
+    top: 60px;
+    width: 1528px;
+    height: 114px;
+    background: #0A385429;
+}
+
+.worker3 {
+    position: relative;
+    top: 95px;
+    width: 1528px;
+    height: 114px;
+    background: #0A385429;
+}
+
+.userLittleIcon {
+    position: relative;
+    left: 150px;
+    padding-top: 7px;
+}
+
+.userName, .userLogin, .userPassword {
+    width: 276px;
+}
+
+.userName {
+    position: relative;
+    left: 290px;
+    bottom: 90px;
+}
+
+.userLogin {
+    position: relative;
+    left: 200px;
+    bottom: 85px;
+}
+
+.userPassword {
+    position: relative;
+    left: 235px;
+    bottom: 80px;
+}
+
