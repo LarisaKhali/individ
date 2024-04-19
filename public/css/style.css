@@ -10,8 +10,9 @@
 
 body {
     background: url("../img/background_image.jpg") no-repeat;
-    background-size: 1920px 1080px;
+    background-size: 1920px 1000px;
 }
+
 
 .container {
     display: flex;
@@ -24,22 +25,23 @@ body {
 }
 
 .b-w {
-    background: white;
+    background: #EFF6FF;
 }
 
 .frame {
     width: 767px;
     height: 537px;
     border: 1px solid #1889C9;
-    display: flex;
-    justify-content: center;
-    text-align: center;
+    position: relative;
+    top: 190px;
 }
 
 .login_form {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    top: 45px;
 }
 
 .inputLoginForm {
@@ -55,18 +57,16 @@ input {
     border: 1px solid #1889C9;
     font-size: 20px;
     padding-left: 5px;
+    margin-top: 15px;
 }
-
 
 .authText {
     color: #36A5BD;
     font-size: 59px;
-    position: relative;
-    left: 150px;
-    bottom: 215px;
+    padding-top: 25px;
 }
 
-button {
+.submitInput {
     width: 290.06px;
     height: 65.28px;
     background: #36A5BD;
@@ -74,12 +74,231 @@ button {
     border-radius: 25px;
     color: #FFE8D2;
     font-size: 20px;
+    transition: .9s;
+    position: relative;
+    right: 25px;
+    top: 45px;
+}
+
+.submitInput:hover {
+    cursor: pointer;
+    border: 2px solid #36A5BD;
+    color: #36A5BD;
+    background: white;
+    transition: .9s;
 }
 
 label {
     font-size: 20px;
+    position: relative;
+    margin-top: 25px;
 }
 
 button:hover {
     cursor: pointer;
+}
+
+.girlPicture {
+    position: relative;
+    left: 37px;
+    top: 125px;
+    height: 700px;
+}
+
+#siteForWhat {
+    position: relative;
+    font-size: 48px;
+    font-weight: 700;
+    left: 1000px;
+    width: 820px;
+    bottom: 420px;
+    color: #425C5A;
+}
+
+#siteForWhatAbout {
+    position: relative;
+    font-size: 20px;
+    font-weight: 300;
+    left: 1000px;
+    bottom: 380px;
+    width: 820px;
+    color: #425C5A;
+}
+
+.goToAuthInput {
+    position: relative;
+    left: 1500px;
+    top: -340px;
+}
+
+header {
+    background-color: #EFF6FF;
+    position: relative;
+    height: 70px;
+}
+
+.linkNavigation {
+    text-decoration: none;
+    color: #0A3854;
+    font-size: 22px;
+    position: relative;
+    padding-left: 150px;
+    transition: .9s;
+    bottom: 5px;
+}
+
+.linkNavigation:last-child {
+    left: 800px;
+}
+
+.linkNavigation:hover {
+    color: #1889C9;
+    transition: .9s;
+}
+
+.logoutIcon {
+    position: relative;
+    top: 20px;
+    left: 10px;
+}
+
+.FIOUser {
+    color: #425C5A;
+    font-size: 48px;
+    font-weight: 700;
+    position: relative;
+    top: 100px;
+    left: 550px;
+    width: 700px;
+}
+
+.roleUser {
+    position: relative;
+    left: 550px;
+    top: 120px;
+    font-size: 20px;
+    width: 700px;
+}
+
+.userIcon {
+    position: relative;
+    left: 100px;
+}
+
+.saveChanges {
+    width: 230px;
+    height: 40px;
+    background: #36A5BD;
+    border: none;
+    border-radius: 25px;
+    color: #FFE8D2;
+    font-size: 18px;
+    transition: .9s;
+}
+
+.saveChanges:hover {
+    cursor: pointer;
+    border: 2px solid #36A5BD;
+    color: #36A5BD;
+    background: white;
+    transition: .9s;
+}
+
+.changeInfoForm1 {
+    position: relative;
+    width: 490px;
+    height: 261px;
+    left: 550px;
+    bottom: 180px;
+}
+
+.changeInfoForm2 {
+    position: relative;
+    width: 490px;
+    height: 261px;
+    left: 830px;
+    bottom: 441px;
+}
+
+.changeInfoForm3 {
+    position: relative;
+    width: 490px;
+    height: 261px;
+    left: 1130px;
+    bottom: 702px;
+}
+
+p {
+    font-size: 20px;
+}
+
+.inputAvatar {
+    width: 343px;
+    height: 34px;
+    border-radius: 15px;
+    color: #425C5A75;
+}
+
+.inputAvatarButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 185px;
+    height: 33px;
+    top: -43px;
+    left: 136px;
+    border-radius: 15px;
+    border: 1px solid #1889C9;
+    background-color: #1889C9;
+    font-size: 20px;
+    color: white;
+
+}
+
+.inputAvatarButton:hover {
+    cursor: pointer;
+}
+
+.saveChangesProfile {
+    position: relative;
+    top: 100px;
+    width: 230px;
+    height: 40px;
+    background: #36A5BD;
+    border: none;
+    border-radius: 25px;
+    color: #FFE8D2;
+    font-size: 18px;
+    transition: .9s;
+}
+
+.saveChangesProfile:hover {
+    cursor: pointer;
+    border: 2px solid #36A5BD;
+    color: #36A5BD;
+    background: white;
+    transition: .9s;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+.fileName {
+    display: flex;
+    position: relative;
+    border: 1px solid #1889C9;
+    border-radius: 15px;
+    color:  #425C5A75;
+    text-align: center;
+    align-items: center;
+    width: 154px;
+    height: 33px;
+    top: 15px;
+    padding-left: 10px;
+    border-right: none;
+}
+
+.changeInfoForm {
+    height: 300px;
 }

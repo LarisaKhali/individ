@@ -9,23 +9,7 @@
     <link rel="stylesheet" href="../../public/css/style.css">
 </head>
 <body>
-<header>
-    <nav>
-        <a href="<?= app()->route->getUrl('/hello') ?>" class="t-d-n">Главная</a>
-        <?php
-        if (!app()->auth::check()):
-            ?>
-            <a href="<?= app()->route->getUrl('/login') ?>" class="t-d-n">Вход</a>
-        <?php
-        else:
-            ?>
-            <a href="<?= app()->route->getUrl('/signup') ?>" class="t-d-n">Добавить пользователя   </a>
-            <a href="<?= app()->route->getUrl('/logout') ?>" class="t-d-n">Выход (<?= app()->auth::user()->nickname ?>)</a>
-        <?php
-        endif;
-        ?>
-    </nav>
-</header>
+
 <main>
     <?= $content ?? '' ?>
 </main>
