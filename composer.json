@@ -1,0 +1,26 @@
+{
+    "name": "laric/individ",
+    "description": "chtoto",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "larisakhali",
+            "email": "larica290501@mail.ru"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.4 | ^8.0",
+        "illuminate/database": "9.x-dev",
+        "illuminate/events": "9.x-dev",
+        "nikic/fast-route": "v1.x-dev",
+        "larapack/dd": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Src\\": "core/Src/",
+            "": "app/"
+        }
+    }
+}

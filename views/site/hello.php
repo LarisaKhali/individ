@@ -13,7 +13,7 @@
 <?php
 if (!app()->auth::check()):
     ?>
-    <main>
+    <main class="goToLogin">
         <img src="../../public/img/girl_picture.png" alt="Нет изображения" class="girlPicture">
         <h2 id="siteForWhat">Сайт для работы с работниками</h2>
         <h3 id="siteForWhatAbout">Удобный интерфейс, всё находится под рукой, быстрая загрузка страниц, вам точно понравится!</h3>

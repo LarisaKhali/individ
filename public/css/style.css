@@ -6,6 +6,7 @@
     outline: 0;
     font-family: 'Roboto', sans-serif;
     box-sizing: border-box;
+    max-height: 880px;
 }
 
 body {
@@ -43,13 +44,19 @@ body {
     top: 45px;
 }
 
+.goToLogin {
+    width: 1500px;
+    position: relative;
+    right: 30px;
+}
+
 .inputLoginForm {
     width: 230px;
     height: 147px;
     display: block;
 }
 
-input {
+input, .selectType {
     border-radius: 15px;
     width: 230px;
     height: 34px;
@@ -57,6 +64,7 @@ input {
     font-size: 20px;
     padding-left: 5px;
     margin-top: 15px;
+    margin-bottom: 10px;
 }
 
 .authText {
@@ -79,18 +87,15 @@ input {
     top: 45px;
 }
 
-.submitInput:hover {
-    cursor: pointer;
-    border: 2px solid #36A5BD;
-    color: #36A5BD;
-    background: white;
-    transition: .9s;
-}
-
 label {
     font-size: 20px;
     position: relative;
     margin-top: 25px;
+}
+
+h2 {
+    font-size: 18px;
+    font-weight: 700;
 }
 
 button:hover {
@@ -195,14 +200,6 @@ header {
     transition: .9s;
 }
 
-.saveChanges:hover {
-    cursor: pointer;
-    border: 2px solid #36A5BD;
-    color: #36A5BD;
-    background: white;
-    transition: .9s;
-}
-
 .changeInfoForm1 {
     position: relative;
     width: 490px;
@@ -234,6 +231,10 @@ p {
     justify-content: center;
 }
 
+.noneLeft {
+    justify-content: left;
+}
+
 .inputAvatar {
     width: 343px;
     height: 34px;
@@ -263,7 +264,7 @@ p {
 
 .saveChangesProfile {
     position: relative;
-    top: 100px;
+    top: 120px;
     width: 230px;
     height: 40px;
     background: #36A5BD;
@@ -271,14 +272,6 @@ p {
     border-radius: 25px;
     color: #FFE8D2;
     font-size: 18px;
-    transition: .9s;
-}
-
-.saveChangesProfile:hover {
-    cursor: pointer;
-    border: 2px solid #36A5BD;
-    color: #36A5BD;
-    background: white;
     transition: .9s;
 }
 
@@ -321,8 +314,8 @@ input[type="file"] {
 
 .addWorker {
     position: relative;
-    left: 190px;
-    top: 50px;
+    left: 150px;
+    top: 15px;
     padding-left: 10px;
     padding-top: 10px;
     width: 763px;
@@ -341,13 +334,13 @@ input[type="file"] {
 .addWorkerForm2 {
     position: relative;
     left: 243px;
-    bottom: 189px;
+    bottom: 210px;
 }
 
 .addWorkerForm3 {
     position: relative;
     left: 485px;
-    bottom: 378px;
+    bottom: 420px;
 }
 
 .createWorkerButton {
@@ -364,7 +357,7 @@ input[type="file"] {
     transition: .9s;
 }
 
-.createWorkerButton:hover {
+.createWorkerButton:hover, .createBuildingButton:hover, .submitInput:hover, .saveChangesProfile:hover, .saveChanges:hover, .calculationsButton:hover, .createRoomButton:hover  {
     cursor: pointer;
     border: 2px solid #36A5BD;
     color: #36A5BD;
@@ -375,12 +368,13 @@ input[type="file"] {
 .c-g {
     color: #232828;
     opacity: .9;
+    margin-bottom: 10px;
 }
 
 .allWorkers {
     position: relative;
     width: 1528px;
-    left: 195px;
+    left: 150px;
     top: 80px;
 }
 
@@ -440,3 +434,270 @@ input[type="file"] {
     bottom: 80px;
 }
 
+.deleteWorker {
+    position: relative;
+    left: 1150px;
+    bottom: 120px;
+    width: 230px;
+    height: 40px;
+    display: block;
+    color: #FFE8D2;
+    background: #BD3646;
+    border: none;
+    border-radius: 15px;
+    font-size: 20px;
+    transition: .9s;
+}
+
+.deleteWorker:hover {
+    cursor: pointer;
+    border: 2px solid #BD3646;
+    color: #BD3646;
+    background: white;
+    transition: .9s;
+}
+
+.arrowDownIcon {
+    position: relative;
+    left: 760px;
+    top: 82px;
+}
+
+.arrowDownIcon:hover, .arrowDownIcon2:hover, .arrowDownIcon3:hover {
+    cursor: pointer;
+}
+
+.addNewBuilding {
+    position: relative;
+    left: 140px;
+    top: 50px;
+    padding-left: 10px;
+    padding-top: 10px;
+    width: 300px;
+    height: 233px;
+}
+
+.createBuildingButton {
+    position: relative;
+    top: 30px;
+    width: 230px;
+    height: 40px;
+    background: #36A5BD;
+    border: none;
+    border-radius: 25px;
+    color: #FFE8D2;
+    font-size: 18px;
+    transition: .9s;
+}
+
+.allBuildings {
+    position: relative;
+    width: 1270px;
+    left: 450px;
+    bottom: 180px;
+}
+
+.building1 {
+    border-radius: 5px;
+    position: relative;
+    top: 25px;
+    width: 1270px;
+    height: 114px;
+    background: #0A385429;
+}
+
+.building2 {
+    border-radius: 5px;
+    position: relative;
+    top: 60px;
+    width: 1270px;
+    height: 114px;
+    background: #0A385429;
+}
+
+.allBuildingsText {
+    position: relative;
+    left: 120px;
+}
+
+.buildingLittleIcon {
+    position: relative;
+    left: 120px;
+    top: 5px;
+}
+
+.buildingName {
+    position: relative;
+    left: 230px;
+    bottom: 70px;
+}
+
+.buildingAddress {
+    position: relative;
+    left: 235px;
+    bottom: 62px;
+}
+
+.moreDetails {
+    position: relative;
+    left: 700px;
+    top: -110px;
+    width: 230px;
+    height: 40px;
+    color: #36A5BD;
+    border: 1px solid #36A5BD;
+    border-radius: 25px;
+    background: white;
+    font-size: 18px;
+    transition: .9s;
+}
+
+.calculationsButton {
+    position: relative;
+    left: 720px;
+    top: -110px;
+    width: 230px;
+    height: 40px;
+    color: #FFE8D2;
+    border: 1px solid #36A5BD;
+    border-radius: 25px;
+    background: #36A5BD;
+    font-size: 18px;
+    transition: .9s;
+}
+
+.moreDetails:hover {
+    text-decoration: underline;
+}
+
+.arrowDownIcon2 {
+    position: relative;
+    left: 560px;
+    top: 450px;
+}
+
+.createRoomButton {
+    width: 230px;
+    height: 40px;
+    color: #FFE8D2;
+    border: 1px solid #36A5BD;
+    border-radius: 25px;
+    background: #36A5BD;
+    font-size: 18px;
+    transition: .9s;
+}
+
+.addNewRoom {
+    position: relative;
+    left: 140px;
+    top: 50px;
+    width: 300px;
+    height: 428px;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.addRoomForm {
+    position: relative;
+    padding-left: 20px;
+}
+
+.roomIcon {
+    position: relative;
+    left: 450px;
+    bottom: 600px;
+}
+
+.editBuildingForm {
+    width: 700px;
+    position: relative;
+    left: 711px;
+    bottom: 370px;
+}
+
+.allRoomsText {
+    position: relative;
+    left: 450px;
+    width: 700px;
+    bottom: 470px;
+}
+
+.room1 {
+    border-radius: 5px;
+    position: relative;
+    left: 450px;
+    bottom: 440px;
+    width: 1270px;
+    height: 114px;
+    background: #0A385429;
+}
+
+.schoolbagIcon {
+    position: relative;
+    bottom: 150px;
+    right: -75px;
+}
+
+.roomName {
+    width: 400px;
+    position: relative;
+    left: 195px;
+    top: 15px;
+}
+
+.roomNumber {
+    position: relative;
+    left: 202px;
+    top: 20px;
+}
+
+.roomType {
+    position: relative;
+    left: 233px;
+    top: 25px;
+}
+
+.roomArea {
+    position: relative;
+    left: 520px;
+    bottom: 53px;
+}
+
+.roomNumberOfSeats {
+    position: relative;
+    left: 428px;
+    bottom: 48px;
+    width: 500px;
+}
+
+.deleteRoom {
+    position: relative;
+    left: 940px;
+    bottom: 77px;
+    width: 230px;
+    height: 40px;
+    display: block;
+    color: #FFE8D2;
+    background: #BD3646;
+    border: none;
+    border-radius: 15px;
+    font-size: 20px;
+    transition: .9s;
+}
+
+.deleteRoom:hover {
+    cursor: pointer;
+    border: 2px solid #BD3646;
+    color: #BD3646;
+    background: white;
+    transition: .9s;
+}
+.arrowDownIcon3 {
+    position: relative;
+    left: 535px;
+    top: 120px;
+}
+
+.allRooms {
+    height: 114px;
+}

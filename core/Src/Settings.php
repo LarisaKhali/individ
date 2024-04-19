@@ -2,20 +2,37 @@
 
 namespace Src;
 
-class Session
-{
-    public static function set($name, $value): void
+use Error;
+
+class Settings {
+    private array $_settings;
+
+    public function __construct(array $settings = [])
     {
-        $_SESSION[$name] = $value;
+        $this->_settings = $settings;
     }
 
-    public static function get($name)
+    public function __get($key)
     {
-        return $_SESSION[$name] ?? null;
+        if (array_key_exists($key, $this->_settings)) {
+            return $this->_settings[$key];
+        }
+        throw new Error ('Accessing a non-existent property');
     }
 
-    public static function clear($name)
+    public function getRootPath(): string
     {
-        unset($_SESSION[$name]);
+        return $this->path['root'] ? '/' . $this->path['root'] : '';
     }
+
+    public function getViewsPath(): string
+    {
+        return '/' . $this->path['views'] ?? '';
+    }
+
+    public function getDbSetting(): array
+    {
+        return $this->db ?? [];
+    }
+
 }
