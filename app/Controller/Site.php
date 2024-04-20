@@ -6,8 +6,8 @@ use Src\Validator\Validator;
 use Src\View;
 use Src\Request;
 use Model\User;
+use Model\Building;
 use Src\Auth\Auth;
-
 class Site
 {
     public function hello()
@@ -17,12 +17,41 @@ class Site
 
     public function profile(Request $request): string
     {
-        if ($request->method ==='POST' && User::create($request->all())) {
-            echo 'Пользователь успешно зарегистрирован!';
+        $userId = app()->auth->user()->id;
+
+        if ($request->method === 'POST') {
+
+            $validator = new Validator($request->all(), [
+                'nickname' => ['required', 'minlength'],
+                'role_id' => [],
+                'surname' => ['required'],
+                'name' => ['required'],
+                'patronymic' => [],
+                'email' => ['required'],
+                'password' => ['required'],
+                'avatar' => []
+            ], [
+                'required' => 'Поле :field пустое',
+                'minlength' => 'Поле :field должно содержать не менее 4 символов'
+            ]);
+
+            if (($validator->errors())) {
+                var_dump($validator->errors());
+            }
+
+            if ($validator->fails()) {
+                return new View('site.profile', ['message' => $validator->errors()]);
+            }
+
+            $user = User::find($userId);
+            $user->update($request->all());
         }
-        return (new View())->render('site.profile');
+
+        return new View('site.profile', ['message' => 'Данные успешно обновлены', 'userAvatar' => 'data:image/jpeg;base64,' . base64_encode(app()->auth::user()->avatar)]);
     }
-    public function workspace(Request $request): string {
+
+    public function workspace_admin(Request $request): string {
+
         if ($request->method === 'POST') {
             $validator = new Validator($request->all(), [
                 'role_id' => [],
@@ -50,25 +79,21 @@ class Site
             }
         }
 
-        return (new View())->render('site.workspace');
+        $allWorkers = User::all();
+
+
+        return (new View())->render('site.workspace', ['allWorkers' => $allWorkers]);
     }
+
     public function login(Request $request): string
     {
         if ($request->method === 'GET') {
             return new View('site.login');
         }
-
-        if ($request->method === 'POST') {
-            if (Auth::attempt($request->all())) {
-                app()->route->redirect('/profile');
-            } else {
-                return new View('site.login', ['message' => 'Неправильные логин или пароль']);
-            }
-        }
-       /* if (Auth::attempt($request->all())) {
+        if (Auth::attempt($request->all())) {
             app()->route->redirect('/profile');
-        }*/
-        return new View('site.login');
+        }
+        return new View('site.login', ['message' => 'Неправильные логин или пароль']);
     }
 
     public function logout(): void
@@ -77,10 +102,62 @@ class Site
         app()->route->redirect('/');
     }
 
-    public function room()
+    public function room(Request $request, $build_id): string
     {
-        return (new View())->render('site.room');
+        $building = Building::find($build_id);
+
+        if ($request->method === 'POST') {
+
+            $validator = new Validator($request->all(), [
+                'name' => ['required', 'minlength'],
+                'address' => ['required'],
+            ], [
+                'required' => 'Поле :field пустое',
+                'minlength' => 'Поле :field должно содержать не менее 4 символов'
+            ]);
+
+            if (($validator->errors())) {
+                var_dump($validator->errors());
+            }
+
+            if ($validator->fails()) {
+                return new View('site.room', ['message' => $validator->errors()]);
+            }
+
+            $building->update($request->all());
+
+        }
+        return (new View())->render('site.room', ['building' => $building]);
     }
+
+    public function workspace_worker(Request $request):string
+    {
+        if ($request->method === 'POST') {
+            $validator = new Validator($request->all(), [
+                'name' => ['required'],
+                'address' => ['required'],
+            ], [
+                'required' => 'Поле :field пустое',
+            ]);
+
+            var_dump($validator->errors());
+
+            if ($validator->fails()) {
+                return new View('site.workspace',
+                    ['message' => $validator->errors(), JSON_UNESCAPED_UNICODE]);
+            }
+
+            if (Building::create($request->all())) {
+                app()->route->redirect('/profile');
+            }
+        }
+
+
+        $allBuildings = Building::all();
+
+        return (new View())->render('site.workspace',['allBuildings' => $allBuildings]);
+    }
+
 
 
 }
