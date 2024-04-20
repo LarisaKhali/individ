@@ -33,12 +33,7 @@ if (app()->auth::check()):
                 <p class="noneLeft">Отчество</p> <input type="text" name="patronymic" value="<?= app()->auth::user()->patronymic ?>"><br><br>
             </div>
             <div class="changeInfoForm3">
-                <p class="noneLeft">Изменить аватарку</p>
-                <div class="fileName"><?= app()->auth::user()->avatar ?></div>
-                <label for="file-upload" class="inputAvatarButton">
-                    Выберите файл
-                </label>
-                <input id="file-upload" type="file" />
+
 
                 <button class="saveChangesProfile">Сохранить изменения</button>
             </div>

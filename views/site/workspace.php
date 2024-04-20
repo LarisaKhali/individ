@@ -85,14 +85,14 @@ elseif (app()->auth::check()):
             <p class="buildingName">Название: Биокорпус</p>
             <p class="buildingAddress">Адрес: ул.Уличная д.1</p>
             <a href="<?= app()->route->getUrl('/room') ?>"><button type="submit" class="moreDetails">Подробнее</button></a>
-            <button type="submit" class="calculationsButton">Подсчеты</button>
+
         </div>
         <div class="building2">
             <img src="../../public/img/building_little_icon.png" alt="Нет изображения" class="buildingLittleIcon">
             <p class="buildingName">Название: Биокорпус</p>
             <p class="buildingAddress">Адрес: ул.Уличная д.1</p>
             <a href="<?= app()->route->getUrl('/room') ?>"><button type="submit" class="moreDetails">Подробнее</button></a>
-            <button type="submit" class="calculationsButton">Подсчеты</button>
+
         </div>
         <img src="../../public/img/arrow-down.png" alt="Нет изображения" class="arrowDownIcon2">
     </main>
