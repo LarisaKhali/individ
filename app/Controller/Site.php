@@ -2,6 +2,9 @@
 
 namespace Controller;
 
+use Model\ListRoom;
+use Model\Room;
+use Model\Type;
 use Src\Validator\Validator;
 use Src\View;
 use Src\Request;
@@ -29,7 +32,6 @@ class Site
                 'patronymic' => [],
                 'email' => ['required'],
                 'password' => ['required'],
-                'avatar' => []
             ], [
                 'required' => 'Поле :field пустое',
                 'minlength' => 'Поле :field должно содержать не менее 4 символов'
@@ -47,7 +49,7 @@ class Site
             $user->update($request->all());
         }
 
-        return new View('site.profile', ['message' => 'Данные успешно обновлены', 'userAvatar' => 'data:image/jpeg;base64,' . base64_encode(app()->auth::user()->avatar)]);
+        return new View('site.profile', ['message' => 'Данные успешно обновлены']);
     }
 
     public function workspace_admin(Request $request): string {
@@ -61,7 +63,6 @@ class Site
                 'nickname' => ['required', 'unique:users,nickname'],
                 'email' => ['required'],
                 'password' => ['required'],
-                'avatar' => []
             ], [
                 'required' => 'Поле :field пустое',
                 'unique' => 'Поле :field должно быть уникальным',
@@ -75,7 +76,7 @@ class Site
             }
 
             if (User::create($request->all())) {
-                app()->route->redirect('/profile');
+                app()->route->redirect('/workspace_admin');
             }
         }
 
@@ -102,40 +103,83 @@ class Site
         app()->route->redirect('/');
     }
 
-    public function room(Request $request, $build_id): string
-    {
+    public function room($build_id): string {
+        $request = new Request();
         $building = Building::find($build_id);
+        $rooms = Room::where('build_id', $build_id)->get();
+        $type = Type::all();
 
         if ($request->method === 'POST') {
+            if (isset($_POST['name_building'])) {
+                $validator = new Validator($request->all(), [
+                    'name_building' => ['required', 'minlength'],
+                    'address_building' => ['required'],
+                ], [
+                    'required' => 'Поле :field пустое',
+                    'minlength' => 'Поле :field должно содержать не менее 4 символов'
+                ]);
 
-            $validator = new Validator($request->all(), [
-                'name' => ['required', 'minlength'],
-                'address' => ['required'],
-            ], [
-                'required' => 'Поле :field пустое',
-                'minlength' => 'Поле :field должно содержать не менее 4 символов'
-            ]);
+                if ($validator->fails()) {
+                    return new View('site.room', ['message' => $validator->errors()]);
+                }
 
-            if (($validator->errors())) {
-                var_dump($validator->errors());
+                $building->update($request->all());
             }
+            else {
+                $validator = new Validator($request->all(), [
+                    'name' => ['required'],
+                    'number' => ['required'],
+                    'type_id' => ['required'],
+                    'area' => ['required'],
+                    'number_of_seats' => ['required'],
+                ], [
+                    'required' => 'Поле :field пустое',
+                    'minlength' => 'Поле :field должно содержать не менее 4 символов'
+                ]);
 
-            if ($validator->fails()) {
-                return new View('site.room', ['message' => $validator->errors()]);
+                if ($validator->fails()) {
+                    return new View('site.room', ['message' => $validator->errors()]);
+                }
+
+                $room = Room::create([
+                    'build_id' => $building->build_id,
+                    'name' => $request->name,
+                    'number' => $request->number,
+                    'type_id' => $request->type_id,
+                    'area' => $request->area,
+                    'number_of_seats' => $request->number_of_seats,
+                ]);
+
+                $room_id = $room->id;
+
+                ListRoom::create([
+                    'build_id' => $building->build_id,
+                    'room_id' => $room_id
+                ]);
+
+                app()->route->redirect('/workspace_worker');
             }
-
-            $building->update($request->all());
-
         }
-        return (new View())->render('site.room', ['building' => $building]);
+
+        if (isset($_GET['countAreaAndSeats'])) {
+
+            $countAreaAndSeats = $_GET['countAreaAndSeats'];
+            $sumArea = Room::where('build_id', $countAreaAndSeats)->sum('area');
+            $sumSeats = Room::where('build_id', $countAreaAndSeats)->sum('number_of_seats');
+
+            return (new View())->render('site.room', ['building' => $building, 'rooms' => $rooms, 'types' => $type, 'sumArea' => $sumArea, 'sumSeats' => $sumSeats]);
+        }
+
+        return (new View())->render('site.room', ['building' => $building, 'rooms' => $rooms, 'types' => $type]);
     }
 
     public function workspace_worker(Request $request):string
     {
         if ($request->method === 'POST') {
             $validator = new Validator($request->all(), [
-                'name' => ['required'],
-                'address' => ['required'],
+                'name_building' => ['required'],
+                'address_building' => ['required'],
+                'image_path' => []
             ], [
                 'required' => 'Поле :field пустое',
             ]);
@@ -147,8 +191,29 @@ class Site
                     ['message' => $validator->errors(), JSON_UNESCAPED_UNICODE]);
             }
 
-            if (Building::create($request->all())) {
-                app()->route->redirect('/profile');
+            $image_path = $_FILES['image_path']['name'];
+            $target_dir = __DIR__ . '/../../uploads/avatars/';
+            $target_file = $target_dir . basename($image_path);
+            $fileName = $_FILES['image_path']['name'];
+
+            if (move_uploaded_file($_FILES["image_path"]["tmp_name"], $target_file)){
+
+                if (Building::create([
+                    'name_building' => $request->all()['name_building'],
+                    'address_building' => $request->all()['address_building'],
+                    'image_path' => $fileName
+                ])) {
+                    app()->route->redirect('/workspace_worker');
+                }};
+
+        }
+
+        if ($request->method === 'GET' && isset($_GET['search'])) {
+            $search = $_GET['search'];
+            $building = Building::where('name_building', 'like', '%' . $search . '%')->first();
+
+            if ($building) {
+                return (new View())->render('site.workspace', ['building' => $building]);
             }
         }
 
@@ -157,7 +222,6 @@ class Site
 
         return (new View())->render('site.workspace',['allBuildings' => $allBuildings]);
     }
-
 
 
 }

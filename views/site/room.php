@@ -38,6 +38,15 @@ if (app()->auth::check() && app()->auth->user()->role_id == 2):
     </main>
     <img src="../../public/img/room_icon.png" alt="Нет изображения" class="roomIcon"></a>
 
+    <div class="areaAndSeatsText">
+        <?php if (isset($sumArea)): ?>
+            <p class="areaAndSeatsText"> Суммарная площадь: <b> <?= ' ' . $sumArea . ' ' ?> </b> кв. м.</p>
+        <?php endif; ?>
+        <?php if (isset($sumSeats)): ?>
+            <p class="areaAndSeatsText"> Суммарное количество посадочных мест: <b> <?= $sumSeats ?> </b>  </p>
+        <?php endif; ?>
+    </div>
+
     <h2 class="c-g fs-30px allRoomsText">Все помещения</h2>
     <?php
     foreach ($rooms as $room) {
@@ -51,7 +60,6 @@ if (app()->auth::check() && app()->auth->user()->role_id == 2):
         echo '</div><br><br>';
     }
     ?>
-    <img src="../../public/img/arrow-down.png" alt="Нет изображения" class="arrowDownIcon3">
 
 <?php
 

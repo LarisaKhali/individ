@@ -1,11 +1,11 @@
 <?php
-
-if (app()->auth->user()->role_id == 1):
+if (app()->auth::check() && app()->auth->user()->role_id == 1):
     ?>
     <header>
         <a href="<?= app()->route->getUrl('/profile') ?>" class="linkNavigation">Профиль</a>
         <a href="<?= app()->route->getUrl('/workspace_admin') ?>" class="linkNavigation">Рабочая область</a>
         <a href="<?= app()->route->getUrl('/logout') ?>" class="linkNavigation">Выход <img src="../../public/img/logout_icon.jpg" alt="Нет изображения" class="logoutIcon"></a>
+
     </header>
 
     <main class="profileInfo">
@@ -30,7 +30,7 @@ if (app()->auth->user()->role_id == 1):
     </main>
 
 <?php
-elseif (app()->auth->user()->role_id == 2):
+elseif (app()->auth::check() && app()->auth->user()->role_id == 2):
     ?>
     <header>
         <a href="<?= app()->route->getUrl('/profile') ?>" class="linkNavigation">Профиль</a>
@@ -59,6 +59,12 @@ elseif (app()->auth->user()->role_id == 2):
             </div>
         </form>
     </main>
+
+<?php
+else:
+    ?>
+    <h3 class="youNotAuthorizedText">Вы не авторизованы</h3>
+    <a href="<?= app()->route->getUrl('/login'); ?>"><input type="submit" class="submitInput goToAuth" value="Авторизация"></a>
 
 <?php
 endif;

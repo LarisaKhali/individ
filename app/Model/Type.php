@@ -6,27 +6,23 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Src\Auth\IdentityInterface;
 
-class Building extends Model
+class Type extends Model
 {
     use HasFactory;
 
     public $timestamps = false;
     protected $fillable = [
-        'name_building',
-        'address_building',
-        'image_path',
+        'name',
     ];
 
-    protected $primaryKey = 'build_id';
-
-    public function findIdentity(int $build_id)
+    public function findIdentity(int $id)
     {
-        return self::where('build_id', $build_id)->first();
+        return self::where('id', $id)->first();
     }
 
     public function getId(): int
     {
-        return $this->build_id;
+        return $this->id;
     }
 
 }

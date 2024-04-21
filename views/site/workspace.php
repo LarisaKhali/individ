@@ -27,10 +27,10 @@ if (app()->auth::check() && app()->auth->user()->role_id == 1):
                 <p>Имя</p> <input type="text" name="name" ><br><br>
                 <p>Отчество</p> <input type="text" name="patronymic"><br><br>
             </div>
-            <input type="file" name="avatar" value="'../../uploads/avatar/default_avatar.png'" hidden>
             <button class="createWorkerButton">Создание</button>
         </form>
     </main>
+
 
     <main class="allWorkers">
         <h2 class="c-g fs-30px">Все сотрудники деканата</h2>
@@ -62,35 +62,60 @@ elseif (app()->auth::check()):
         <a href="<?= app()->route->getUrl('/logout') ?>" class="linkNavigation">Выход <img src="../../public/img/logout_icon.jpg" alt="Нет изображения" class="logoutIcon"></a>
     </header>
 
+    <div class="searchForm">
+        <form method="GET" class="search">
+            <p><input type="text" name="search" placeholder="Поиск по названию"></p>
+            <button type="submit" class="searchButton">Найти</button>
+        </form>
+    </div>
+
     <main class="addNewBuilding">
         <h2 class="c-g">Добавление нового здания</h2>
-        <form method="POST" class="addNewBuildingForm">
+        <form method="POST" class="addNewBuildingForm" enctype="multipart/form-data">
             <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
             <p>Название</p> <input type="text" name="name_building"><br>
             <p>Адрес</p> <input type="text" name="address_building"><br>
+            <p>Добавить фото</p>
+            <div class="fileName"></div>
+            <label for="file-upload" class="inputAvatarButton">
+                Выберите файл
+            </label>
+            <input type="file" name="image_path" id="file-upload" />
             <button class="createBuildingButton">Создание</button>
         </form>
     </main>
 
     <main class="allBuildings">
         <h2 class="c-g fs-30px allBuildingsText">Все здания</h2>
-        <?php
-        foreach ($allBuildings as $building) {
-            echo '<div class="building">';
-            echo '<img src="../../public/img/building_little_icon.png" alt="Нет изображения" class="userLittleIcon">';
-            echo '<div class="buildingInfo">';
-            echo '<p class="infoText">Название: ' . $building->name_building . '</p>';
-            echo '<p class="infoText">Адрес: ' . $building->address_building . '</p>';
-            echo '</div>';
-            echo '<form method="GET" action="' . app()->route->getUrl('/room/' . $building->build_id). '">';
-            echo '<button type="submit" class="moreDetails">Подробнее</button>';
-            echo '</form>';
-            echo '<button type="submit" class="calculationsButton">Подсчеты</button>';
-            echo '</div><br><br>';
-        }
-        ?>
-        <img src="../../public/img/arrow-down.png" alt="Нет изображения" class="arrowDownIcon2">
+        <?php if (isset($building)): ?>
+            <div class="building">
+                <img src="../../public/img/building_little_icon.png" alt="Нет изображения" class="userLittleIcon">
+                <div class="buildingInfo">
+                    <p class="infoText">Название: <?= $building->name_building ?></p>
+                    <p class="infoText">Адрес: <?= $building->address_building ?></p>
+                </div>
+                <form method="GET" action="<?= app()->route->getUrl('/room/' . $building->build_id) ?>">
+                    <button type="submit" class="moreDetails">Подробнее</button>
+                    <input type="hidden" name="countAreaAndSeats" value="<?= $building->build_id ?>">
+                </form>
+            </div><br><br>
+        <?php elseif (isset($allBuildings)): ?>
+            <?php foreach ($allBuildings as $building): ?>
+                <div class="building">
+                    <img src="../../public/img/building_little_icon.png" alt="Нет изображения" class="userLittleIcon">
+                    <div class="buildingInfo">
+                        <p class="infoText">Название: <?= $building->name_building ?></p>
+                        <p class="infoText">Адрес: <?= $building->address_building ?></p>
+                    </div>
+                    <form method="GET" action="<?= app()->route->getUrl('/room/' . $building->build_id) ?>">
+                        <button type="submit" class="moreDetails">Подробнее</button>
+                        <input type="hidden" name="countAreaAndSeats" value="<?= $building->build_id ?>">
+                    </form>
+                </div><br><br>
+            <?php endforeach; ?>
+        <?php endif; ?>
     </main>
+
 
 <?php
 
